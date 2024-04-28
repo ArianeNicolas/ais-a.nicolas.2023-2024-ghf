@@ -1,0 +1,15 @@
+name: AIS Workflow 1
+
+on: 
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - name: Execute tests
+        
