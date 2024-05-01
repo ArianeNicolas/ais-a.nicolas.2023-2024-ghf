@@ -17,7 +17,7 @@ jobs:
             uses: actions/setup-java@v3
             with:
                 distribution: 'temurin'
-                java-version: '11'
+                java-version: '17'
           - name: System test
             if: (matrix.browser != 'safari' || startsWith(matrix.os, 'macos-')) && (matrix.browser != 'edge' || startsWith(matrix.os, 'windows-'))
             run: mvn test -Dtest=SeleniumTests -Dbrowser=${{ matrix.browser }}
