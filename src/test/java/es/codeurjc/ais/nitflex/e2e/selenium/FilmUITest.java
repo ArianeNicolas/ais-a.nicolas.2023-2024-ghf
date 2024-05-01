@@ -1,5 +1,7 @@
 package es.codeurjc.ais.nitflex.e2e.selenium;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -50,6 +52,7 @@ public class FilmUITest {
             options.addArguments("--headless");
             driver = new FirefoxDriver(options);
         }
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
     }
 
 	@AfterEach
