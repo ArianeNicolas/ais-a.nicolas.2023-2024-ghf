@@ -1,0 +1,18 @@
+name: AIS Workflow 4
+
+on:
+    workflow_dispatch
+
+jobs:
+    test:
+        runs-on: ${{ matrix.os }}
+        strategy:
+          matrix:
+            os: [ubuntu-latest, windows-latest, macos-latest]
+            browser: [chrome, firefox, edge, safari]
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v2
+          - name: System test
+            if: matrix.browser != 'safari' || startsWith(matrix.os, 'macos-') && matrix.browser != 'edge' || startsWith(matrix.os, 'windows-')
+            run: mvn test -Dtest=SeleniumTests -Dbrowser=${{ matrix.os }}

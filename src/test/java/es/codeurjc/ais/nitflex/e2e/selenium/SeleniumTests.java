@@ -4,6 +4,8 @@ package es.codeurjc.ais.nitflex.e2e.selenium;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
+import es.codeurjc.ais.nitflex.Application;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.AfterEach;
@@ -11,8 +13,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
 
 @SpringBootTest(
     classes = Application.class, 
@@ -21,7 +28,6 @@ class SeleniumTests {
     
     @LocalServerPort
     int port;
-
     private WebDriver driver;
 
     //film infos
@@ -29,13 +35,29 @@ class SeleniumTests {
     String year = "2006";
     String image = "https://images.affiches-et-posters.com//albums/3/52534/medium/poster-film-james-bond-casino-royale.jpg";
     String synopsis = "The first James Bond movie with Daniel Craig";
+    
+    String browser = System.getProperty("browser");
 
     @BeforeEach
 	void setupTest() {
-        FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--headless");
-		driver = new FirefoxDriver(options);
-        
+        if(browser.equals("safari")){
+            driver = new SafariDriver();
+        }
+        else if(browser.equals("edge")){
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless");
+            driver = new EdgeDriver(options);
+        }
+        else if(browser.equals("chrome")){
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
+        }
+        else{
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
+            driver = new FirefoxDriver(options);
+        }
 	}
 
     @AfterEach

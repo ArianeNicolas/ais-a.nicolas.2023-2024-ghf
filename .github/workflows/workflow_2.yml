@@ -2,6 +2,8 @@ name: AIS Workflow 2
 
 on: 
   pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -19,4 +21,5 @@ jobs:
       - name: Integration tests
         run: mvn test -Dtest=es/codeurjc/ais/nitflex/integration/*
       - name: System tests
-        run: mvn test -Dtest=es/codeurjc/ais/nitflex/e2e/selenium/*
+        run: mvn test -Dtest=es/codeurjc/ais/nitflex/e2e/selenium/* -Dbrowser='firefox'
+        

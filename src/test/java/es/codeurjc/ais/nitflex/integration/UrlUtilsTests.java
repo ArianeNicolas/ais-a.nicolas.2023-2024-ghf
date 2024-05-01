@@ -1,4 +1,4 @@
-package es.codeurjc.ais.nitflex.Tests_Practica1;
+package es.codeurjc.ais.nitflex.integration;
 
 import org.junit.jupiter.api.Test;
 
