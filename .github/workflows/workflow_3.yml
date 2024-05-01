@@ -42,7 +42,7 @@ jobs:
             --resource-group ${{ secrets.AZURE_GROUP }} \
             --name nitflex \
             --image ${{ secrets.DOCKERHUB_USERNAME }}/nitflex:${{ github.sha }} \
-            --dns-name-label ais-nitflex \
+            --dns-name-label ariane-nicolas-nitflex \
             --ports 8080
 
     test:
