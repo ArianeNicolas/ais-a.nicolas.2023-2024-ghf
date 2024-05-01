@@ -4,9 +4,12 @@ on:
   push:
     branches-ignore:
       - main
-    paths:
-      - src/*
-      - pom.xml
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - target/*
+      - .vscode
+
 
 jobs:
   test:
