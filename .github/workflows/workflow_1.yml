@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - main
     paths:
-      - src//*
+      - src/*
       - pom.xml
 
 jobs:
