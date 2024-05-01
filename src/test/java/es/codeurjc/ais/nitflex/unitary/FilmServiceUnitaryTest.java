@@ -24,7 +24,7 @@ public class FilmServiceUnitaryTest {
     
     @Test
     @DisplayName("Cuando se guarda una película (con una URL correcta) utilizando FilmService, se guarda en el repositorio y se lanza una notificación")
-    public void createFilm() {
+    public void createFilmTest() {
 
         repository = mock(FilmRepository.class);
         notificationService = mock(NotificationService.class);

@@ -13,6 +13,11 @@ jobs:
         steps:
           - name: Checkout repository
             uses: actions/checkout@v2
+          - name: Set up JDK 17
+            uses: actions/setup-java@v3
+            with:
+                distribution: 'temurin'
+                java-version: '17'
           - name: System test
-            if: matrix.browser != 'safari' || startsWith(matrix.os, 'macos-') && matrix.browser != 'edge' || startsWith(matrix.os, 'windows-')
-            run: mvn test -Dtest=SeleniumTests -Dbrowser=${{ matrix.os }}
+            if: (matrix.browser != 'safari' || startsWith(matrix.os, 'macos-')) && (matrix.browser != 'edge' || startsWith(matrix.os, 'windows-'))
+            run: mvn test -Dtest=SeleniumTests -Dbrowser=${{ matrix.browser }}

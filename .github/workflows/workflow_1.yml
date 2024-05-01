@@ -4,9 +4,12 @@ on:
   push:
     branches-ignore:
       - main
-    paths:
-      - src//*
-      - pom.xml
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - target/*
+      - .vscode
+
 
 jobs:
   test:
@@ -20,7 +23,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Unit tests
-        run: mvn test -Dtest=es/codeurjc/ais/nitflex/unitary/*
+        run: mvn test -Dtest="es/codeurjc/ais/nitflex/unitary/*"
       - name: Integration tests
-        run: mvn test -Dtest=es/codeurjc/ais/nitflex/integration/*
+        run: mvn test -Dtest="es/codeurjc/ais/nitflex/integration/*"
         
