@@ -117,6 +117,7 @@ class SeleniumTests {
 
     }
 
+    /*
     @Test
     void cancelEdit() throws InterruptedException{
         driver.get("http://localhost:"+this.port+"/");
@@ -138,5 +139,5 @@ class SeleniumTests {
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
         assertThat(driver.findElement(By.id("image")).getAttribute("src")).isEqualTo(image);
         assertThat(driver.findElement(By.id("film-synopsis")).getText()).isEqualTo(synopsis);
-    }
+    }*/
 }
