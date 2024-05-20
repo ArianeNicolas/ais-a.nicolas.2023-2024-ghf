@@ -78,7 +78,7 @@ class SeleniumTests {
     void addMovie() throws InterruptedException {
         driver.get("http://localhost:"+this.port+"/");
         driver.findElement(By.id("create-film")).click();
-        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("title")));
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("title")));
         driver.findElement(By.name("title")).sendKeys(title);
         driver.findElement(By.name("releaseYear")).sendKeys(year);
         driver.findElement(By.name("url")).sendKeys(image);
@@ -101,7 +101,7 @@ class SeleniumTests {
 
         //Create a new film and come back to the list of films
         driver.findElement(By.id("create-film")).click();
-        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("title")));
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("title")));
         driver.findElement(By.name("title")).sendKeys(title);
         driver.findElement(By.name("releaseYear")).sendKeys(year);
         driver.findElement(By.name("url")).sendKeys(image);
