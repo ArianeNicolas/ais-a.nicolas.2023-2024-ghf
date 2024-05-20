@@ -57,5 +57,5 @@ jobs:
             distribution: 'temurin'
             java-version: '17'
         - name: Smoke Test
-          run: mvn test -Dhost=ariane-nicolas-nitflex.westeurope.azurecontainer.io:8080 -Dtest=es/codeurjc/ais/nitflex/smoke/*
+          run: mvn test -Dhost=http://ariane-nicolas-nitflex.westeurope.azurecontainer.io:8080/ -Dtest=es/codeurjc/ais/nitflex/smoke/*
 

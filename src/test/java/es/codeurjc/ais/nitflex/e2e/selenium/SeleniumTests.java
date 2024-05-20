@@ -83,14 +83,14 @@ class SeleniumTests {
         driver.findElement(By.name("url")).sendKeys(image);
         driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.textToBe(By.id("film-title"), title));
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
-        
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("all-films")));
         //delete the film for next tests
         driver.findElement(By.id("all-films")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(title)));
         driver.findElement(By.linkText(title)).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("remove-film")));
         driver.findElement(By.id("remove-film")).click();
     }
 
@@ -105,23 +105,21 @@ class SeleniumTests {
         driver.findElement(By.name("url")).sendKeys(image);
         driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("all-films")));
         driver.findElement(By.id("all-films")).click();
-
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(title)));
 
         //Delete the film
         driver.findElement(By.linkText(title)).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("remove-film")));
         driver.findElement(By.id("remove-film")).click();
 
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
         //Verify that we get the deletion message
         assertThat(driver.findElement(By.id("message")).getText()).contains("deleted");
 
         //Come back to the list of films
         driver.findElement(By.id("all-films")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         //Verify that the film is not in the list anymore
         assertThat(driver.findElements(By.linkText(title))).isEmpty();
 
