@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SmokeTest {
 
     private WebDriver driver;
-    String host = "http://ais-nitflex.westeurope.azurecontainer.io:8080";//System.getProperty("host");
+    String host = System.getProperty("host");
 
     @BeforeEach
 	void setupTest() {
