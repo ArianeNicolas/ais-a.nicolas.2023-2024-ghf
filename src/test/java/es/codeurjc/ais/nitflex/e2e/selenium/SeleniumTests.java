@@ -8,6 +8,8 @@ import es.codeurjc.ais.nitflex.Application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @SpringBootTest(
     classes = Application.class, 
@@ -29,6 +32,7 @@ class SeleniumTests {
     @LocalServerPort
     int port;
     private WebDriver driver;
+    private WebDriverWait wait;
 
     //film infos
     String title = "Casino Royal";
@@ -58,6 +62,7 @@ class SeleniumTests {
             options.addArguments("--headless");
             driver = new FirefoxDriver(options);
         }
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 	}
 
     @AfterEach
@@ -69,7 +74,6 @@ class SeleniumTests {
 
     @Test
     void addMovie() throws InterruptedException {
-        System.out.println("add movie !");
         driver.get("http://localhost:"+this.port+"/");
         driver.findElement(By.id("create-film")).click();
         driver.findElement(By.name("title")).sendKeys(title);
@@ -77,12 +81,14 @@ class SeleniumTests {
         driver.findElement(By.name("url")).sendKeys(image);
         driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
-        Thread.sleep(1000);
+        this.wait.wait();
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
         
         //delete the film for next tests
         driver.findElement(By.id("all-films")).click();
+        this.wait.wait();
         driver.findElement(By.linkText(title)).click();
+        this.wait.wait();
         driver.findElement(By.id("remove-film")).click();
     }
 
@@ -97,21 +103,23 @@ class SeleniumTests {
         driver.findElement(By.name("url")).sendKeys(image);
         driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
+        this.wait.wait();
         driver.findElement(By.id("all-films")).click();
 
-        Thread.sleep(1000);
+        this.wait.wait();
 
         //Delete the film
         driver.findElement(By.linkText(title)).click();
+        this.wait.wait();
         driver.findElement(By.id("remove-film")).click();
 
-        Thread.sleep(1000);
+        this.wait.wait();
         //Verify that we get the deletion message
         assertThat(driver.findElement(By.id("message")).getText()).contains("deleted");
 
         //Come back to the list of films
         driver.findElement(By.id("all-films")).click();
-        Thread.sleep(1000);
+        this.wait.wait();
         //Verify that the film is not in the list anymore
         assertThat(driver.findElements(By.linkText(title))).isEmpty();
 
