@@ -83,7 +83,7 @@ class SeleniumTests {
         driver.findElement(By.name("url")).sendKeys(image);
         driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
-        this.wait.until(ExpectedConditions.textToBe(By.id("film-title"), title));
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
         
         //delete the film for next tests
