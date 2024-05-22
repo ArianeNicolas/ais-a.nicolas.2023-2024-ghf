@@ -140,12 +140,12 @@ class SeleniumTests {
         driver.findElement(By.name("url")).sendKeys(image);
         driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
-        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("edit-film")));
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("edit-film")));
         //We are now on the page about the created film
         driver.findElement(By.id("edit-film")).click();//We click on Edit
-        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("cancel")));
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cancel")));
         driver.findElement(By.id("cancel")).click();
-        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("film-title")));
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("film-title")));
 
         //Verify that we are on the film page, and that the infos haven't change
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
