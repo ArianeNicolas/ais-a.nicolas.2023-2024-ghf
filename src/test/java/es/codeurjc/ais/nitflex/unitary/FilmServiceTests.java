@@ -47,6 +47,7 @@ class FilmServiceTests {
         Film film = mock(Film.class);
         when(film.getTitle()).thenReturn("A Fantastic Film");
         when(film.getUrl()).thenReturn("anInvalidUrl");
+        when(film.getReleaseYear()).thenReturn(2000);
 
         FilmRepository filmRepository = mock(FilmRepository.class);
         when(filmRepository.save(film)).thenReturn(film);
