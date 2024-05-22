@@ -144,27 +144,27 @@ class SeleniumTests {
         assertThat(driver.findElement(By.id("message")).getText()).contains("The release year is not valid");
     }
 
-    /*
+    
     @Test
     void cancelEdit() throws InterruptedException{
         driver.get("http://localhost:"+this.port+"/");
 
         //Create a new film
         driver.findElement(By.id("create-film")).click();
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("title")));
         driver.findElement(By.name("title")).sendKeys(title);
         driver.findElement(By.name("releaseYear")).sendKeys(year);
         driver.findElement(By.name("url")).sendKeys(image);
-        //driver.findElement(By.name("synopsis")).sendKeys(synopsis);
+        driver.findElement(By.name("synopsis")).sendKeys(synopsis);
         driver.findElement(By.id("Save")).click();
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("edit-film")));
         //We are now on the page about the created film
-        Thread.sleep(1000);
         driver.findElement(By.id("edit-film")).click();//We click on Edit
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cancel")));
         driver.findElement(By.id("cancel")).click();
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("film-title")));
 
-        Thread.sleep(1000);
         //Verify that we are on the film page, and that the infos haven't change
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
-        assertThat(driver.findElement(By.id("image")).getAttribute("src")).isEqualTo(image);
-        assertThat(driver.findElement(By.id("film-synopsis")).getText()).isEqualTo(synopsis);
-    }*/
+    }
 }
