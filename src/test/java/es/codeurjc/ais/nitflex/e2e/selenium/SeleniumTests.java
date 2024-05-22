@@ -42,7 +42,7 @@ class SeleniumTests {
     String image = "https://images.affiches-et-posters.com//albums/3/52534/medium/poster-film-james-bond-casino-royale.jpg";
     String synopsis = "The first James Bond movie with Daniel Craig";
     
-    String browser = System.getProperty("browser");
+    String browser = "";//System.getProperty("browser");
 
     @BeforeEach
 	void setupTest() {
@@ -125,6 +125,23 @@ class SeleniumTests {
         //Verify that the film is not in the list anymore
         assertThat(driver.findElements(By.linkText(title))).isEmpty();
 
+    }
+
+    @Test
+    void invalidReleaseYear(){
+        driver.get("http://localhost:"+this.port+"/");
+
+        //Create a new film and come back to the list of films
+        driver.findElement(By.id("create-film")).click();
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.name("title")));
+        driver.findElement(By.name("title")).sendKeys(title);
+        driver.findElement(By.name("releaseYear")).sendKeys("1200");
+        driver.findElement(By.name("url")).sendKeys(image);
+        driver.findElement(By.name("synopsis")).sendKeys(synopsis);
+        driver.findElement(By.id("Save")).click();
+
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
+        assertThat(driver.findElement(By.id("message")).getText()).contains("The release year is not valid");
     }
 
     /*

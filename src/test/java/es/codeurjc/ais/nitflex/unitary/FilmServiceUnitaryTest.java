@@ -44,5 +44,6 @@ public class FilmServiceUnitaryTest {
         verify(urlUtils, times(1)).checkValidImageURL("FAKE URL");
         verify(notificationService).notify("Film Event: Film with title=" + book.getTitle() + " was created");
     }
+    
 
 }

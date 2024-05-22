@@ -64,4 +64,24 @@ class FilmServiceTests {
 
     }
 
+    @Test
+    void invalidReleaseYear(){
+        Film film = mock(Film.class);
+        when(film.getTitle()).thenReturn("A Fantastic Film");
+        when(film.getReleaseYear()).thenReturn(1200);
+
+        FilmRepository filmRepository = mock(FilmRepository.class);
+        when(filmRepository.save(film)).thenReturn(film);
+        
+        NotificationService notifService = mock(NotificationService.class);
+        UrlUtils urlUtils = mock(UrlUtils.class);
+
+        FilmService filmService = new FilmService(filmRepository, notifService, urlUtils);
+        assertThrows(ResponseStatusException.class, () -> filmService.save(film));
+
+        verify(filmRepository, never()).save(any());
+        verify(notifService, never()).notify(anyString());
+        verify(urlUtils, never()).checkValidImageURL(anyString());
+    }
+
 }
