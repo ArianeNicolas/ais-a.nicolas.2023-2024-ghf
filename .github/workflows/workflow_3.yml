@@ -1,10 +1,9 @@
 name: AIS Workflow 3
 
 on:
-  workflow_dispatch:
-  #push:
-   # branches:
-    #- main
+  push:
+    branches:
+    - main
 
 permissions:
   id-token: write
