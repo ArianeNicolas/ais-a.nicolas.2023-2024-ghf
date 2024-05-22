@@ -42,6 +42,9 @@ public class FilmService {
 		if (film.getTitle() == "") {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The title is empty");
 		}
+		else if(film.getReleaseYear()<1895){
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The release year is not valid");
+		}
 		urlUtils.checkValidImageURL(film.getUrl());
 		Film newFilm = repository.save(film);
 		notificationService.notify("Film Event: Film with title="+newFilm.getTitle()+" was created");
