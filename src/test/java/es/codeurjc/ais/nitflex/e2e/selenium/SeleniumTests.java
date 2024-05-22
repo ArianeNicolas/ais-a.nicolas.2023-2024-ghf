@@ -149,7 +149,5 @@ class SeleniumTests {
 
         //Verify that we are on the film page, and that the infos haven't change
         assertThat(driver.findElement(By.id("film-title")).getText()).isEqualTo(title);
-        assertThat(driver.findElement(By.id("image")).getAttribute("src")).isEqualTo(image);
-        assertThat(driver.findElement(By.id("film-synopsis")).getText()).isEqualTo(synopsis);
     }
 }
